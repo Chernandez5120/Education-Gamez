@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import brainLogo from './assets/images/PNG image.png'
 import './App.css'
 
 function App() {
   return (
     <div className="app-container">
       <div className="logo-container">
-        <img src="/src/assets/brain-boxing.svg" alt="Brain with boxing gloves" className="app-logo" />
+        <img src={brainLogo} alt="Brain with boxing gloves" className="app-logo" />
         <h1>Knowledge Lockout</h1>
       </div>
       <div className="button-container">
