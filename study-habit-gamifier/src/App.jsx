@@ -24,6 +24,32 @@ function App() {
           <h1>Knowledge Knockout</h1>
           <p className="hero-subtitle">Train Your Brain, Fight for Knowledge!</p>
         </div>
+
+        <div className="features-section">
+          <h2>Why Choose Knowledge Knockout?</h2>
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">🎯</div>
+              <h3>Set Clear Goals</h3>
+              <p>Define your learning objectives and create actionable study plans.</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">📈</div>
+              <h3>Track Progress</h3>
+              <p>Monitor your study hours and celebrate your achievements.</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">🏆</div>
+              <h3>Stay Motivated</h3>
+              <p>Compete with others and maintain your study streaks.</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">💎</div>
+              <h3>Join Community</h3>
+              <p>Connect with fellow learners and share your success stories.</p>
+            </div>
+          </div>
+        </div>
       </main>
 
       <footer className="footer">
