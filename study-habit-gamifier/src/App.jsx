@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import brainLogo from './assets/images/PNG image.png'
+import brainLogo from './assets/images/brain.png'
 import './App.css'
 
 function App() {

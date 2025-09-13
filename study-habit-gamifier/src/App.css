@@ -47,6 +47,7 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 2px;
+  white-space: nowrap;
 }
 
 .nav-links {
@@ -102,6 +103,18 @@
   min-height: calc(100vh - 180px);
   text-align: center;
   padding: 2rem;
+}
+
+.hero-section h1 {
+  color: #ffffff;
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.7),
+               0 0 40px rgba(255, 0, 0, 0.4);
+  letter-spacing: 4px;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .hero-logo {
