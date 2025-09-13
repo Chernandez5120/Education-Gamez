@@ -6,7 +6,10 @@ import './App.css'
 function App() {
   return (
     <div className="app-container">
-      <h1>Study Habit Gamifier</h1>
+      <div className="logo-container">
+        <img src="/src/assets/brain-boxing.svg" alt="Brain with boxing gloves" className="app-logo" />
+        <h1>Knowledge Lockout</h1>
+      </div>
       <div className="button-container">
         <button className="main-button" onClick={() => console.log('Set Goal clicked')}>
           Set Goal

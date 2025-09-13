@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Brain -->
+  <path d="M100 40 C130 40 150 60 150 90 C150 110 140 125 125 135 C140 145 150 160 150 180 L50 180 C50 160 60 145 75 135 C60 125 50 110 50 90 C50 60 70 40 100 40" 
+        fill="#FFA8A8" stroke="#333" stroke-width="4"/>
+  <!-- Brain details -->
+  <path d="M75 90 Q100 70 125 90 M75 110 Q100 90 125 110" 
+        fill="none" stroke="#333" stroke-width="3"/>
+  
+  <!-- Left Boxing Glove -->
+  <g transform="translate(-10, 0)">
+    <path d="M40 140 C30 140 25 150 25 160 C25 170 35 175 45 175 C55 175 60 165 60 155 C60 145 50 140 40 140" 
+          fill="#FF0000" stroke="#333" stroke-width="3"/>
+    <!-- Glove strap -->
+    <path d="M45 140 L55 130" stroke="#333" stroke-width="3"/>
+  </g>
+  
+  <!-- Right Boxing Glove -->
+  <g transform="translate(170, 0)">
+    <path d="M40 140 C30 140 25 150 25 160 C25 170 35 175 45 175 C55 175 60 165 60 155 C60 145 50 140 40 140" 
+          fill="#FF0000" stroke="#333" stroke-width="3"/>
+    <!-- Glove strap -->
+    <path d="M35 140 L25 130" stroke="#333" stroke-width="3"/>
+  </g>
+</svg>
