@@ -1,55 +1,77 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import brainLogo from './assets/images/brain.png'
+import Goals from './components/Goals'
+import { GoalsProvider } from './context/GoalsContext'
 import './App.css'
 
 function App() {
   return (
-    <div className="app-container">
+    <Router>
+      <GoalsProvider>
+        <div className="app-container">
       <header className="navbar">
         <div className="nav-logo">
           <img src={brainLogo} alt="Brain with boxing gloves" className="nav-logo-image" />
           <span className="nav-title">Knowledge Knockout</span>
         </div>
         <nav className="nav-links">
-          <button className="nav-button">Home</button>
-          <button className="nav-button">Set Goal</button>
-          <button className="nav-button">Check Goals</button>
-          <button className="nav-button">Leaderboard</button>
+          <Link to="/" className="nav-button">Home</Link>
+          <Link to="/goals" className="nav-button">Goals</Link>
+          <Link to="/leaderboard" className="nav-button">Leaderboard</Link>
         </nav>
       </header>
 
       <main className="main-content">
-        <div className="hero-section">
-          <img src={brainLogo} alt="Brain with boxing gloves" className="hero-logo" />
-          <h1>Knowledge Knockout</h1>
-          <p className="hero-subtitle">Train Your Brain, Fight for Knowledge!</p>
-        </div>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <div className="hero-section">
+                <img src={brainLogo} alt="Brain with boxing gloves" className="hero-logo" />
+                <h1>Knowledge Knockout</h1>
+                <p className="hero-subtitle">Train Your Brain, Fight for Knowledge!</p>
+              </div>
 
-        <div className="features-section">
-          <h2>Why Choose Knowledge Knockout?</h2>
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon">🎯</div>
-              <h3>Set Clear Goals</h3>
-              <p>Define your learning objectives and create actionable study plans.</p>
+              <div className="features-section">
+                <h2>Why Choose Knowledge Knockout?</h2>
+                <div className="features-grid">
+                  <div className="feature-card">
+                    <div className="feature-icon">🎯</div>
+                    <h3>Set Clear Goals</h3>
+                    <p>Define your learning objectives and create actionable study plans.</p>
+                  </div>
+                  <div className="feature-card">
+                    <div className="feature-icon">📈</div>
+                    <h3>Track Progress</h3>
+                    <p>Monitor your study hours and celebrate your achievements.</p>
+                  </div>
+                  <div className="feature-card">
+                    <div className="feature-icon">🏆</div>
+                    <h3>Stay Motivated</h3>
+                    <p>Compete with others and maintain your study streaks.</p>
+                  </div>
+                  <div className="feature-card">
+                    <div className="feature-icon">💎</div>
+                    <h3>Join Community</h3>
+                    <p>Connect with fellow learners and share your success stories.</p>
+                  </div>
+                </div>
+              </div>
+            </>
+          } />
+          <Route path="/goals" element={<Goals />} />
+          <Route path="/leaderboard" element={
+            <div className="coming-soon" style={{ 
+              color: '#ffffff',
+              textAlign: 'center',
+              padding: '4rem',
+              fontSize: '2rem',
+              textShadow: '0 0 15px rgba(255, 0, 0, 0.6)'
+            }}>
+              Leaderboard Coming Soon
             </div>
-            <div className="feature-card">
-              <div className="feature-icon">📈</div>
-              <h3>Track Progress</h3>
-              <p>Monitor your study hours and celebrate your achievements.</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">🏆</div>
-              <h3>Stay Motivated</h3>
-              <p>Compete with others and maintain your study streaks.</p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">💎</div>
-              <h3>Join Community</h3>
-              <p>Connect with fellow learners and share your success stories.</p>
-            </div>
-          </div>
-        </div>
+          } />
+        </Routes>
       </main>
 
       <footer className="footer">
@@ -78,7 +100,9 @@ function App() {
           <p>&copy; 2025 Knowledge Knockout. All rights reserved.</p>
         </div>
       </footer>
-    </div>
+        </div>
+      </GoalsProvider>
+    </Router>
   )
 }
 
