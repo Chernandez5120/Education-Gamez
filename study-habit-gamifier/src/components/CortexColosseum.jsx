@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import brainLogo from '../assets/images/brain.png';
+import opponentBrain from '../assets/images/Gemini_Generated_Image_r6ugl9r6ugl9r6ug.png';
 import '../styles/CortexColosseum.css';
 
 export default function CortexColosseum() {
@@ -69,7 +70,7 @@ export default function CortexColosseum() {
           </div>
           
           <div className="brain opponent">
-            <img src={brainLogo} alt="Opponent's brain" className="brain-image" />
+            <img src={opponentBrain} alt="Opponent's brain" className="brain-image" />
             <div className="synapses"></div>
             <div className="power-level">Level 30</div>
             <div className="brain-effects">

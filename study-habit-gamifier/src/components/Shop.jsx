@@ -6,12 +6,48 @@ export default function Shop() {
   const { points, spendPoints, hasPurchasedBrain, purchasedBrains } = useGoals();
 
   const fighters = [
-    { id: 1, name: 'Basic Brain', cost: 100, image: '/brain-placeholder-1.png', description: 'A reliable starter brain fighter' },
-    { id: 2, name: 'Speed Synapse', cost: 250, image: '/brain-placeholder-2.png', description: 'Quick-thinking fighter with fast reactions' },
-    { id: 3, name: 'Memory Master', cost: 500, image: '/brain-placeholder-3.png', description: 'Excellent at pattern recognition and recall' },
-    { id: 4, name: 'Logic Lord', cost: 750, image: '/brain-placeholder-4.png', description: 'Superior problem-solving abilities' },
-    { id: 5, name: 'Creative Crusader', cost: 1000, image: '/brain-placeholder-5.png', description: 'Thinks outside the box with unique strategies' },
-    { id: 6, name: 'Wisdom Warrior', cost: 1500, image: '/brain-placeholder-6.png', description: 'Ultimate brain fighter with balanced stats' }
+    { 
+      id: 1, 
+      name: 'Boxing Brain', 
+      cost: 100, 
+      image: '/src/assets/fighters/boxer-brain.png', 
+      description: 'A determined fighter with boxing gloves and headband, ready for mental combat!'
+    },
+    { 
+      id: 2, 
+      name: 'Viking Scholar', 
+      cost: 500, 
+      image: 'src/assets/images/Gemini_Generated_Image_bj5zxrbj5zxrbj5z.png', 
+      description: 'Ancient wisdom meets raw power, complete with runic knowledge'
+    },
+    { 
+      id: 3, 
+      name: 'Techno Brain', 
+      cost: 750, 
+      image: 'src/assets/images/Gemini_Generated_Image_3oo4u93oo4u93oo4.png', 
+      description: 'Cybernetic enhancements and a monocle for calculated precision'
+    },
+    { 
+      id: 4, 
+      name: 'Valkyrie Brain', 
+      cost: 1000, 
+      image: 'src/assets/images/Gemini_Generated_Image_jhz9rsjhz9rsjhz9.png', 
+      description: 'Magical warrior wielding rainbow powers and celestial might'
+    },
+    { 
+      id: 5, 
+      name: 'Neural King', 
+      cost: 1500, 
+      image: 'src/assets/images/Gemini_Generated_Image_hx4t7shx4t7shx4t.png', 
+      description: 'Crowned champion of knowledge with supreme intellectual power'
+    },
+    { 
+      id: 6, 
+      name: 'Ice Fighter', 
+      cost: 2000, 
+      image: 'src/assets/images/Gemini_Generated_Image_g1g7veg1g7veg1g7.png', 
+      description: 'Master of cool calculation with electrifying combat techniques'
+    }
   ];
 
   const handlePurchase = (fighter) => {

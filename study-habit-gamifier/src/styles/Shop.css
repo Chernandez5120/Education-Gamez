@@ -10,9 +10,31 @@
 }
 
 .shop-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(45deg, #ff3366, #ff0033);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 
+    0 0 20px rgba(255, 51, 102, 0.5),
+    0 0 40px rgba(255, 51, 102, 0.3);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 
+      0 0 20px rgba(255, 51, 102, 0.5),
+      0 0 40px rgba(255, 51, 102, 0.3);
+  }
+  to {
+    text-shadow: 
+      0 0 30px rgba(255, 51, 102, 0.7),
+      0 0 50px rgba(255, 51, 102, 0.5);
+  }
 }
 
 .points-display {
@@ -38,31 +60,70 @@
 }
 
 .fighter-card {
-  background: rgba(0, 0, 0, 0.8);
-  border: 2px solid #ff0000;
-  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
   padding: 1.5rem;
   text-align: center;
-  color: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 51, 102, 0.3);
+  box-shadow: 
+    0 0 20px rgba(255, 51, 102, 0.2),
+    inset 0 0 50px rgba(255, 51, 102, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.fighter-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255, 51, 102, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(51, 102, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .fighter-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  border-color: rgba(255, 51, 102, 0.8);
+  box-shadow: 
+    0 10px 30px rgba(255, 51, 102, 0.4),
+    inset 0 0 70px rgba(255, 51, 102, 0.2);
+}
+
+.fighter-name {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: linear-gradient(45deg, #ff3366, #ff0033);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 15px rgba(255, 51, 102, 0.5);
 }
 
 .fighter-image {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   object-fit: contain;
   margin-bottom: 1rem;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.05);
   padding: 1rem;
+  transition: all 0.3s ease-in-out;
+  filter: drop-shadow(0 0 10px rgba(255, 51, 102, 0.3));
+}
+
+.fighter-card:hover .fighter-image {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(255, 51, 102, 0.5));
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .fighter-card h3 {
@@ -72,9 +133,19 @@
 }
 
 .fighter-description {
-  margin: 0.5rem 0;
-  font-size: 0.9rem;
-  color: #cccccc;
+  font-size: 1rem;
+  color: #e0e0e0;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+  opacity: 0.8;
+  max-width: 90%;
+  margin: 1rem auto;
+}
+
+.fighter-card:hover .fighter-description {
+  opacity: 1;
+  color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .fighter-cost {
@@ -85,23 +156,48 @@
 }
 
 .purchase-button {
-  background: linear-gradient(45deg, #ff0000, #ff6b6b);
+  background: linear-gradient(45deg, #ff3366, #ff0033);
   color: white;
   border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 5px;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s ease;
-  margin-top: auto;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+}
+
+.purchase-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
 }
 
 .purchase-button:hover:not(:disabled) {
-  background: linear-gradient(45deg, #ff6b6b, #ff0000);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 51, 102, 0.4);
+  background: linear-gradient(45deg, #ff0033, #ff3366);
+}
+
+.purchase-button:hover::before {
+  transform: translateX(100%);
 }
 
 .purchase-button:disabled {
-  background: #666666;
+  opacity: 0.6;
   cursor: not-allowed;
-  opacity: 0.7;
+  background: linear-gradient(45deg, #666, #999);
+  box-shadow: none;
 }
