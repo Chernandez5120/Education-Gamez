@@ -4,6 +4,7 @@ import brainLogo from './assets/images/brain.png'
 import Goals from './components/Goals'
 import Leaderboard from './components/Leaderboard'
 import Shop from './components/Shop'
+import CortexColosseum from './components/CortexColosseum'
 import { GoalsProvider } from './context/GoalsContext'
 import './App.css'
 
@@ -21,6 +22,7 @@ function App() {
         </div>
         <nav className="nav-links">
           <Link to="/" className="nav-button">Home</Link>
+          <Link to="/arena" className="nav-button">Battle Arena</Link>
           <Link to="/goals" className="nav-button">Goals</Link>
           <Link to="/leaderboard" className="nav-button">Leaderboard</Link>
           <Link to="/shop" className="nav-button">Shop</Link>
@@ -29,6 +31,7 @@ function App() {
 
       <main className="main-content">
         <Routes>
+          <Route path="/arena" element={<CortexColosseum />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/" element={
             <>
