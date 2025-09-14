@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import brainLogo from './assets/images/brain.png'
 import Goals from './components/Goals'
 import Leaderboard from './components/Leaderboard'
+import Shop from './components/Shop'
 import { GoalsProvider } from './context/GoalsContext'
 import './App.css'
 
@@ -22,11 +23,13 @@ function App() {
           <Link to="/" className="nav-button">Home</Link>
           <Link to="/goals" className="nav-button">Goals</Link>
           <Link to="/leaderboard" className="nav-button">Leaderboard</Link>
+          <Link to="/shop" className="nav-button">Shop</Link>
         </nav>
       </header>
 
       <main className="main-content">
         <Routes>
+          <Route path="/shop" element={<Shop />} />
           <Route path="/" element={
             <>
               <div className="hero-section">
