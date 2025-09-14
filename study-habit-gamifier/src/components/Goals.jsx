@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useGoals } from '../context/GoalsContext';
+import Confetti from 'react-confetti';
 import '../styles/Goals.css';
 
 export default function Goals() {
   const { goals, points, completedGoals, addGoal, completeGoal, deleteGoal } = useGoals();
   const [showForm, setShowForm] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const [newGoal, setNewGoal] = useState({
     title: '',
     duration: '',
@@ -33,6 +35,15 @@ export default function Goals() {
 
   return (
     <div className="goals-page">
+      {showConfetti && (
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          recycle={false}
+          numberOfPieces={200}
+          gravity={0.3}
+        />
+      )}
       <div className="goals-header">
         <h1>Training Goals</h1>
         <div className="points-display">
@@ -113,7 +124,11 @@ export default function Goals() {
                 <div className="goal-card-actions">
                   <button 
                     className="complete-btn"
-                    onClick={() => completeGoal(goal.id)}
+                    onClick={() => {
+                      completeGoal(goal.id);
+                      setShowConfetti(true);
+                      setTimeout(() => setShowConfetti(false), 5000);
+                    }}
                   >
                     Complete
                   </button>
