@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useGoals } from '../context/GoalsContext';
 import Confetti from 'react-confetti';
+import CanvasSettings from './CanvasSettings';
 import '../styles/Goals.css';
 
 export default function Goals() {
@@ -149,6 +150,8 @@ export default function Goals() {
               </div>
             ))}
           </div>
+          
+          <CanvasSettings />
         </div>
 
         <div className="completed-section">

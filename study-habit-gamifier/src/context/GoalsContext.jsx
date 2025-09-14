@@ -1,6 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { CanvasService } from '../services/CanvasService';
 
 const GoalsContext = createContext();
+let canvasService;
+try {
+  canvasService = new CanvasService();
+} catch (error) {
+  console.log('Canvas service initialization failed. Canvas features will be disabled.');
+  canvasService = {
+    isConfigured: false,
+    fetchTodoItems: async () => [],
+    fetchCourses: async () => [],
+    markAssignmentAsSubmitted: async () => {}
+  };
+}
 
 export function useGoals() {
   const context = useContext(GoalsContext);
@@ -21,6 +34,14 @@ export function GoalsProvider({ children }) {
     return savedPoints ? parseInt(savedPoints) : 0;
   });
 
+  const [isCanvasEnabled, setIsCanvasEnabled] = useState(() => {
+    return localStorage.getItem('isCanvasEnabled') === 'true';
+  });
+
+  const [canvasError, setCanvasError] = useState(null);
+
+  const [isLoadingCanvas, setIsLoadingCanvas] = useState(false);
+
   const [completedGoals, setCompletedGoals] = useState(() => {
     const savedCompleted = localStorage.getItem('completedGoals');
     return savedCompleted ? JSON.parse(savedCompleted) : [];
@@ -39,7 +60,38 @@ export function GoalsProvider({ children }) {
     localStorage.setItem('points', points.toString());
     localStorage.setItem('completedGoals', JSON.stringify(completedGoals));
     localStorage.setItem('streak', JSON.stringify(streak));
-  }, [goals, points, completedGoals, streak]);
+    localStorage.setItem('isCanvasEnabled', isCanvasEnabled.toString());
+  }, [goals, points, completedGoals, streak, isCanvasEnabled]);
+
+  // Fetch Canvas todos when enabled
+  useEffect(() => {
+    if (isCanvasEnabled) {
+      fetchCanvasTodos();
+    }
+  }, [isCanvasEnabled]);
+
+  const fetchCanvasTodos = async () => {
+    try {
+      setIsLoadingCanvas(true);
+      setCanvasError(null);
+      const canvasTodos = await canvasService.fetchTodoItems();
+      
+      // Filter out any Canvas todos that are already in our goals list
+      const newTodos = canvasTodos.filter(todo => 
+        !goals.some(goal => goal.id === todo.id) &&
+        !completedGoals.some(goal => goal.id === todo.id)
+      );
+
+      if (newTodos.length > 0) {
+        setGoals(prev => [...prev, ...newTodos]);
+      }
+    } catch (error) {
+      setCanvasError(error.message);
+      console.error('Error fetching Canvas todos:', error);
+    } finally {
+      setIsLoadingCanvas(false);
+    }
+  };
 
   const addGoal = (goal) => {
     const newGoal = {
@@ -51,12 +103,27 @@ export function GoalsProvider({ children }) {
     setGoals(prev => [...prev, newGoal]);
   };
 
-  const completeGoal = (goalId) => {
+  const completeGoal = async (goalId) => {
     const goalToComplete = goals.find(goal => goal.id === goalId);
     if (goalToComplete && !goalToComplete.completed) {
-      // Calculate points based on duration
-      const earnedPoints = Math.floor(goalToComplete.duration / 5) * 10; // 10 points per 5 minutes
+      // Calculate points based on duration or Canvas points possible
+      const earnedPoints = goalToComplete.source === 'canvas' && goalToComplete.pointsPossible
+        ? Math.floor(goalToComplete.pointsPossible)
+        : Math.floor(goalToComplete.duration / 5) * 10; // 10 points per 5 minutes
       setPoints(prev => prev + earnedPoints);
+
+      // If it's a Canvas assignment, mark it as submitted
+      if (goalToComplete.source === 'canvas') {
+        try {
+          await canvasService.markAssignmentAsSubmitted(
+            goalToComplete.canvasAssignmentId,
+            goalToComplete.courseId
+          );
+        } catch (error) {
+          console.error('Error marking Canvas assignment as complete:', error);
+          // Continue with local completion even if Canvas sync fails
+        }
+      }
       
       const now = new Date();
       const completedGoal = {
@@ -110,7 +177,12 @@ export function GoalsProvider({ children }) {
       streak,
       addGoal,
       completeGoal,
-      deleteGoal
+      deleteGoal,
+      isCanvasEnabled,
+      setIsCanvasEnabled,
+      isLoadingCanvas,
+      canvasError,
+      refreshCanvasTodos: fetchCanvasTodos
     }}>
       {children}
     </GoalsContext.Provider>

@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import brainLogo from './assets/images/brain.png'
 import Goals from './components/Goals'
 import Leaderboard from './components/Leaderboard'
 import { GoalsProvider } from './context/GoalsContext'
 import './App.css'
+
+console.log('App is rendering');
 
 function App() {
   return (
