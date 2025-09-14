@@ -3,7 +3,7 @@ import { useGoals } from '../context/GoalsContext';
 import '../styles/Shop.css';
 
 export default function Shop() {
-  const { points } = useGoals();
+  const { points, spendPoints, hasPurchasedBrain, purchasedBrains } = useGoals();
 
   const fighters = [
     { id: 1, name: 'Basic Brain', cost: 100, image: '/brain-placeholder-1.png', description: 'A reliable starter brain fighter' },
@@ -15,8 +15,21 @@ export default function Shop() {
   ];
 
   const handlePurchase = (fighter) => {
-    // TODO: Implement purchase functionality
-    console.log(`Attempting to purchase ${fighter.name} for ${fighter.cost} points`);
+    if (hasPurchasedBrain(fighter.id)) {
+      alert('You already own this brain!');
+      return;
+    }
+
+    if (points >= fighter.cost) {
+      const success = spendPoints(fighter.cost, fighter.id);
+      if (success) {
+        alert(`Successfully purchased ${fighter.name}!`);
+      } else {
+        alert('Failed to complete purchase. Please try again.');
+      }
+    } else {
+      alert('Not enough points!');
+    }
   };
 
   return (
@@ -46,7 +59,7 @@ export default function Shop() {
             <button
               className="purchase-button"
               onClick={() => handlePurchase(fighter)}
-              disabled={points < fighter.cost}
+              disabled={points < fighter.cost || hasPurchasedBrain(fighter.id)}
             >
               {points >= fighter.cost ? 'Purchase' : 'Not Enough Points'}
             </button>

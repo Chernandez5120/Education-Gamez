@@ -47,6 +47,36 @@ export function GoalsProvider({ children }) {
     return savedCompleted ? JSON.parse(savedCompleted) : [];
   });
 
+  const [purchasedBrains, setPurchasedBrains] = useState(() => {
+    const saved = localStorage.getItem('purchasedBrains');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const hasPurchasedBrain = (brainId) => {
+    return purchasedBrains.includes(brainId);
+  };
+
+  const addPurchasedBrain = (brainId) => {
+    setPurchasedBrains(prev => {
+      const newPurchasedBrains = [...prev, brainId];
+      localStorage.setItem('purchasedBrains', JSON.stringify(newPurchasedBrains));
+      return newPurchasedBrains;
+    });
+  };
+
+  const spendPoints = (amount, brainId) => {
+    if (points >= amount && !hasPurchasedBrain(brainId)) {
+      setPoints(prevPoints => {
+        const newPoints = prevPoints - amount;
+        localStorage.setItem('points', newPoints.toString());
+        return newPoints;
+      });
+      addPurchasedBrain(brainId);
+      return true;
+    }
+    return false;
+  };
+
   const [streak, setStreak] = useState(() => {
     const savedStreak = localStorage.getItem('streak');
     return savedStreak ? JSON.parse(savedStreak) : {
@@ -175,6 +205,9 @@ export function GoalsProvider({ children }) {
       points,
       completedGoals,
       streak,
+      spendPoints,
+      hasPurchasedBrain,
+      purchasedBrains,
       addGoal,
       completeGoal,
       deleteGoal,
