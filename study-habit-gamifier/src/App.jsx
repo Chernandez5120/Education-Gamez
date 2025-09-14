@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import brainLogo from './assets/images/brain.png'
 import Goals from './components/Goals'
+import Leaderboard from './components/Leaderboard'
 import { GoalsProvider } from './context/GoalsContext'
 import './App.css'
 
@@ -60,17 +61,7 @@ function App() {
             </>
           } />
           <Route path="/goals" element={<Goals />} />
-          <Route path="/leaderboard" element={
-            <div className="coming-soon" style={{ 
-              color: '#ffffff',
-              textAlign: 'center',
-              padding: '4rem',
-              fontSize: '2rem',
-              textShadow: '0 0 15px rgba(255, 0, 0, 0.6)'
-            }}>
-              Leaderboard Coming Soon
-            </div>
-          } />
+          <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
       </main>
 
