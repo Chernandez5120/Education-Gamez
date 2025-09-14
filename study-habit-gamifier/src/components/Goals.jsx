@@ -4,7 +4,7 @@ import Confetti from 'react-confetti';
 import '../styles/Goals.css';
 
 export default function Goals() {
-  const { goals, points, completedGoals, addGoal, completeGoal, deleteGoal } = useGoals();
+  const { goals, points, completedGoals, streak, addGoal, completeGoal, deleteGoal } = useGoals();
   const [showForm, setShowForm] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [newGoal, setNewGoal] = useState({
@@ -46,10 +46,17 @@ export default function Goals() {
       )}
       <div className="goals-header">
         <h1>Training Goals</h1>
-        <div className="points-display">
-          <span className="points-icon">🏆</span>
-          <span className="points-value">{points}</span>
-          <span className="points-label">POINTS</span>
+        <div className="stats-container">
+          <div className="points-display">
+            <span className="points-icon">🏆</span>
+            <span className="points-value">{points}</span>
+            <span className="points-label">POINTS</span>
+          </div>
+          <div className="streak-display">
+            <span className="streak-icon">🔥</span>
+            <span className="streak-value">{streak?.count || 0}</span>
+            <span className="streak-label">DAY {streak?.count === 1 ? 'STREAK' : 'STREAKS'}</span>
+          </div>
         </div>
       </div>
 

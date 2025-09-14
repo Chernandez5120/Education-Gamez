@@ -18,15 +18,53 @@
   text-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
 }
 
-.points-display {
+.stats-container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.points-display, .streak-display {
   background: rgba(40, 40, 40, 0.9);
   padding: 1rem 2rem;
   border-radius: 15px;
-  border: 2px solid #ff0000;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.points-display {
+  border: 2px solid #ff0000;
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+}
+
+.streak-display {
+  border: 2px solid #ffa500;
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.2);
+}
+
+.streak-icon {
+  font-size: 2rem;
+  animation: flicker 1.5s infinite;
+}
+
+.streak-value {
+  color: #ffa500;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+}
+
+.streak-label {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
 }
 
 .points-icon {

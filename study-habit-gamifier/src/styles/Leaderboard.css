@@ -95,11 +95,43 @@
   align-items: center;
 }
 
+.user-name-with-streak {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .user-name {
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 0.5px;
   color: rgba(255, 255, 255, 0.95);
+}
+
+.streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(255, 69, 0, 0.2);
+  padding: 0.2rem 0.4rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 69, 0, 0.3);
+}
+
+.streak-icon {
+  font-size: 0.9rem;
+  animation: flicker 1.5s infinite;
+}
+
+.streak-count {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
 }
 
 .user-points {
